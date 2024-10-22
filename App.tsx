@@ -6,30 +6,20 @@
  */
 
 import React from 'react';
-import {SafeAreaView, View} from 'react-native';
-import {Text} from './src/components/Text/Text';
 import {ThemeProvider} from '@shopify/restyle';
 import {theme} from './src/theme/theme';
-import {Button} from './src/components/Button/Button';
-import {Icon} from './src/components/Icon/Icon';
+import {LoginScreen} from './src/screens/auth/LoginScreen/LoginScreen';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {SignUpScreen} from './src/screens/auth/SignUpScreen/SignUpScreen';
 
 function App(): React.JSX.Element {
   return (
-    <ThemeProvider theme={theme}>
-      <SafeAreaView>
-        <View style={{padding: 24}}>
-          <Text preset="headingLarge">oi</Text>
-          <Text
-            preset="headingLarge"
-            style={{fontFamily: 'Satoshi-MediumItalic'}}>
-            a
-          </Text>
-          <Button title="oi" />
-          <Button title="lslslls" preset="outline" />
-          <Icon name="eyeOff" color="redError" size={30} />
-        </View>
-      </SafeAreaView>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider theme={theme}>
+        {/* <LoginScreen /> */}
+        <SignUpScreen />
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
 
