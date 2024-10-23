@@ -8,9 +8,9 @@ import {RootStackParamList} from '../../../routes/Routes';
 
 type ScreenProps = NativeStackScreenProps<RootStackParamList, 'SuccessScreen'>;
 
-export function SuccessScreen({route}: ScreenProps) {
+export function SuccessScreen({route, navigation}: ScreenProps) {
   function goBackToLogin() {
-    // TO DO navegação
+    navigation.navigate('LoginScreen');
   }
   return (
     <Screen>
