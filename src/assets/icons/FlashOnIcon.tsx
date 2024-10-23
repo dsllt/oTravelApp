@@ -1,8 +1,8 @@
 import React from 'react';
 import {Svg, Path} from 'react-native-svg';
-import {IconBase} from '../../components/Icon/Icon';
+import {IconBaseProps} from '../../components/Icon/Icon';
 
-export function FlashOnIcon({size = 20, color = 'black'}: IconBase) {
+export function FlashOnIcon({size = 20, color = 'black'}: IconBaseProps) {
   return (
     <Svg width={size} height={size} viewBox="0 0 20 20" fill="none">
       <Path
