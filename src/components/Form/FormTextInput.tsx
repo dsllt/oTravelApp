@@ -6,6 +6,7 @@ export function FormTextInput<FormType extends FieldValues>({
   control,
   name,
   rules,
+  errorMessage,
   ...textInputProps
 }: TextInputProps & UseControllerProps<FormType>) {
   return (
@@ -13,17 +14,14 @@ export function FormTextInput<FormType extends FieldValues>({
       control={control}
       name={name}
       rules={rules}
-      render={({field, fieldState}) => {
-        console.log(fieldState);
-        return (
-          <TextInput
-            {...textInputProps}
-            value={field.value}
-            onChangeText={field.onChange}
-            errorMessage={fieldState.error?.message}
-          />
-        );
-      }}
+      render={({field, fieldState}) => (
+        <TextInput
+          value={field.value}
+          onChangeText={field.onChange}
+          errorMessage={fieldState.error?.message || errorMessage}
+          {...textInputProps}
+        />
+      )}
     />
   );
 }

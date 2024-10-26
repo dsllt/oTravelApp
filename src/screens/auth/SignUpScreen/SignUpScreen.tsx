@@ -6,26 +6,23 @@ import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSucces
 import {useForm} from 'react-hook-form';
 import {FormTextInput} from '../../../components/Form/FormTextInput';
 import {FormPasswordInput} from '../../../components/Form/FormPasswordInput';
-
-type SignUpFormType = {
-  username: string;
-  fullName: string;
-  email: string;
-  password: string;
-};
+import {SignUpSchema, signUpSchema} from './signUpSchema';
+import {zodResolver} from '@hookform/resolvers/zod';
 
 export function SignUpScreen() {
   const {reset} = useResetNavigationSuccess();
-  const {control, formState, handleSubmit} = useForm<SignUpFormType>({
+  const {control, formState, handleSubmit} = useForm<SignUpSchema>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       username: '',
       fullName: '',
       email: '',
       password: '',
     },
+    mode: 'onChange',
   });
 
-  function submitForm(data: any) {
+  function submitForm(data: SignUpSchema) {
     console.log(data);
     // reset({
     //   title: 'Sua conta foi criada com sucesso',
@@ -36,6 +33,7 @@ export function SignUpScreen() {
     //   },
     // });
   }
+
   return (
     <Screen canGoBack scrollable>
       <Text preset="headingLarge" marginBottom="s32">
@@ -45,7 +43,6 @@ export function SignUpScreen() {
       <FormTextInput
         control={control}
         name="username"
-        rules={{required: 'Username obrigatório'}}
         label="Seu username"
         placeholder="@"
         boxProps={{marginBottom: 's20'}}
@@ -53,7 +50,6 @@ export function SignUpScreen() {
       <FormTextInput
         control={control}
         name="fullName"
-        rules={{required: 'Nome obrigatório'}}
         label="Nome completo"
         placeholder="Digite seu nome completo"
         boxProps={{marginBottom: 's20'}}
@@ -61,7 +57,6 @@ export function SignUpScreen() {
       <FormTextInput
         control={control}
         name="email"
-        rules={{required: 'E-mail obrigatório'}}
         label="E-mail"
         placeholder="Digite seu e-mail"
         boxProps={{marginBottom: 's20'}}
@@ -69,7 +64,6 @@ export function SignUpScreen() {
       <FormPasswordInput
         control={control}
         name="password"
-        rules={{required: 'Senha obrigatória'}}
         label="Senha"
         placeholder="Digite sua senha"
         boxProps={{marginBottom: 's48'}}
@@ -78,7 +72,7 @@ export function SignUpScreen() {
       <Button
         title="Criar uma conta"
         onPress={handleSubmit(submitForm)}
-        disabled={!formState.errors}
+        disabled={!formState.isValid}
       />
     </Screen>
   );
