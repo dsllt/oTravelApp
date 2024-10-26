@@ -1,12 +1,12 @@
 import React from 'react';
 import {Text} from '../../../components/Text/Text';
-import {TextInput} from '../../../components/TextInput/TextInput';
 import {Button} from '../../../components/Button/Button';
 import {Screen} from '../../../components/Screen/Screen';
-import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../routes/Routes';
-import {Controller, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
+import {FormTextInput} from '../../../components/Form/FormTextInput';
+import {FormPasswordInput} from '../../../components/Form/FormPasswordInput';
 
 type ScreenProps = NativeStackScreenProps<RootStackParamList, 'LoginScreen'>;
 
@@ -44,29 +44,22 @@ export function LoginScreen({navigation}: ScreenProps) {
         Digite seu e-mail e senha para entrar
       </Text>
 
-      <Controller
+      <FormTextInput
         control={control}
         name="email"
         rules={{
-          required: true,
+          required: 'E-mail é obrigatório',
           pattern: {
             value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
             message: 'E-mail inválido',
           },
         }}
-        render={({field, fieldState}) => (
-          <TextInput
-            label="E-mail"
-            placeholder="Digite seu e-mail"
-            boxProps={{marginBottom: 's20'}}
-            value={field.value}
-            onChangeText={field.onChange}
-            errorMessage={fieldState.error?.message}
-          />
-        )}
+        label="E-mail"
+        placeholder="Digite seu e-mail"
+        boxProps={{marginBottom: 's20'}}
       />
 
-      <Controller
+      <FormPasswordInput
         control={control}
         name="password"
         rules={{
@@ -76,16 +69,9 @@ export function LoginScreen({navigation}: ScreenProps) {
             message: 'Senha deve ter no mínimo 8 caracteres',
           },
         }}
-        render={({field, fieldState}) => (
-          <PasswordInput
-            label="Senha"
-            placeholder="Digite sua senha"
-            boxProps={{marginBottom: 's10'}}
-            value={field.value}
-            onChangeText={field.onChange}
-            errorMessage={fieldState.error?.message}
-          />
-        )}
+        label="Senha"
+        placeholder="Digite sua senha"
+        boxProps={{marginBottom: 's10'}}
       />
 
       <Text

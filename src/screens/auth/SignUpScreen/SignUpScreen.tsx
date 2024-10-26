@@ -2,10 +2,10 @@ import React from 'react';
 import {Screen} from '../../../components/Screen/Screen';
 import {Text} from '../../../components/Text/Text';
 import {Button} from '../../../components/Button/Button';
-import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
 import {useResetNavigationSuccess} from '../../../hooks/useResetNavigationSuccess';
 import {useForm} from 'react-hook-form';
 import {FormTextInput} from '../../../components/Form/FormTextInput';
+import {FormPasswordInput} from '../../../components/Form/FormPasswordInput';
 
 type SignUpFormType = {
   username: string;
@@ -25,7 +25,8 @@ export function SignUpScreen() {
     },
   });
 
-  function submitForm() {
+  function submitForm(data: any) {
+    console.log(data);
     // reset({
     //   title: 'Sua conta foi criada com sucesso',
     //   description: 'Agora é só fazer login na nossa plataforma.',
@@ -65,8 +66,10 @@ export function SignUpScreen() {
         placeholder="Digite seu e-mail"
         boxProps={{marginBottom: 's20'}}
       />
-
-      <PasswordInput
+      <FormPasswordInput
+        control={control}
+        name="password"
+        rules={{required: 'Senha obrigatória'}}
         label="Senha"
         placeholder="Digite sua senha"
         boxProps={{marginBottom: 's48'}}
