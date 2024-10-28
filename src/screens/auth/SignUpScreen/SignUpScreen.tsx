@@ -28,7 +28,6 @@ export function SignUpScreen() {
   });
 
   function submitForm(data: SignUpSchema) {
-    console.log(data);
     // reset({
     //   title: 'Sua conta foi criada com sucesso',
     //   description: 'Agora é só fazer login na nossa plataforma.',
