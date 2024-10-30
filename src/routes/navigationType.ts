@@ -1,7 +1,11 @@
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 import {IconProps} from '@components';
 import {AuthStackParamList, AppStackParamList} from '@routes';
+
+import {AppBottomTabParamList} from './AppTabNavigator';
 
 export type RootStackParamList = {
   LoginScreen: undefined;
@@ -25,3 +29,9 @@ export type AppScreenProps<RouteName extends keyof AppStackParamList> =
 
 export type AuthScreenProps<RouteName extends keyof AuthStackParamList> =
   NativeStackScreenProps<AuthStackParamList, RouteName>;
+
+export type AppTabScreenProps<RouteName extends keyof AppBottomTabParamList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<AppBottomTabParamList, RouteName>,
+    NativeStackScreenProps<AppStackParamList, 'AppTabNavigator'>
+  >;
