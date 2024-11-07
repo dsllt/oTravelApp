@@ -38,3 +38,8 @@ export interface PostApi {
     comments_count: string; //"5"
   };
 }
+
+export type PageParams = {
+  page: number;
+  per_page: number;
+};
